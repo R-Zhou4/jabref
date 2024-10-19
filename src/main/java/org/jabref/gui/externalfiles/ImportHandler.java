@@ -431,6 +431,7 @@ public class ImportHandler {
      *
      * @param files the list of file paths to process
      * @return a list of BibEntry objects to be imported, ensuring uniqueness
+     *
      */
     public List<BibEntry> getEntriesToImport(List<Path> files) {
         List<BibEntry> entriesToImport = new ArrayList<>();
