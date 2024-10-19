@@ -423,6 +423,15 @@ public class ImportHandler {
         }
     }
 
+    /**
+     * This method processes a list of file paths to extract BibEntry objects for import.
+     * It ensures that only unique entries are added to the import list by checking for duplicates
+     * against the existing database entries. If a file is unsupported or contains no valid entries,
+     * an empty entry with a link is created to maintain the integrity of the import process.
+     *
+     * @param files the list of file paths to process
+     * @return a list of BibEntry objects to be imported, ensuring uniqueness
+     */
     public List<BibEntry> getEntriesToImport(List<Path> files) {
         List<BibEntry> entriesToImport = new ArrayList<>();
 
@@ -454,7 +463,6 @@ public class ImportHandler {
                 entriesToImport.add(createEmptyEntryWithLink(file));
             }
         }
-
         return entriesToImport;
     }
 }
