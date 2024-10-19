@@ -422,4 +422,39 @@ public class ImportHandler {
             }
         }
     }
+
+    public List<BibEntry> getEntriesToImport(List<Path> files) {
+        List<BibEntry> entriesToImport = new ArrayList<>();
+
+        for (Path file : files) {
+
+            if (FileUtil.isPDFFile(file)) {
+                var pdfImporterResult = contentImporter.importPDFContent(file);
+                List<BibEntry> pdfEntriesInFile = pdfImporterResult.getDatabase().getEntries();
+                if (pdfImporterResult.hasWarnings()) {
+                    LOGGER.warn("Warnings occurred while importing PDF content: {}", pdfImporterResult.getErrorMessage());
+                }
+                if (!pdfEntriesInFile.isEmpty()) {
+                    entriesToImport.addAll(FileUtil.relativize(pdfEntriesInFile, bibDatabaseContext, preferences.getFilePreferences()));
+                } else {
+                    entriesToImport.add(createEmptyEntryWithLink(file));
+                }
+            } else if (FileUtil.isBibFile(file)) {
+                try {
+                    var bibtexParserResult = contentImporter.importFromBibFile(file, fileUpdateMonitor);
+                    if (bibtexParserResult.hasWarnings()) {
+                        LOGGER.warn("Warnings occurred while importing BibTeX file: {}", bibtexParserResult.getErrorMessage());
+                    }
+                    entriesToImport.addAll(bibtexParserResult.getDatabaseContext().getEntries());
+                } catch (IOException ex) {
+                    LOGGER.error("Error importing from BibTeX file", ex);
+                }
+            } else {
+                LOGGER.warn("Unsupported file type: {}", file.toString());
+                entriesToImport.add(createEmptyEntryWithLink(file));
+            }
+        }
+
+        return entriesToImport;
+    }
 }
