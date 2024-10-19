@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -196,10 +197,10 @@ public class UnlinkedFilesDialogViewModel {
                                                          if (entriesToImportWithoutDuplicates != null && !entriesToImportWithoutDuplicates.isEmpty()) {
                                                              List<ImportFilesResultItemViewModel> convertedEntries = entriesToImportWithoutDuplicates.stream()
                                                                                                                                                      .map(entry -> new ImportFilesResultItemViewModel(
-                                                                                                                                                             UnlinkedFilesDialogViewModel.this.getFilePathFromEntry(entry),
+                                                                                                                                                             Objects.requireNonNull(UnlinkedFilesDialogViewModel.this.getFilePathFromEntry(entry)),
                                                                                                                                                              true,
                                                                                                                                                              "Imported successfully"))
-                                                                                                                                                     .collect(Collectors.toList());
+                                                                                                                                                     .toList();
                                                              resultList.addAll(convertedEntries);
                                                          } else {
                                                              LOGGER.warn("No entries to import or list is not initialized properly.");
@@ -225,7 +226,7 @@ public class UnlinkedFilesDialogViewModel {
         } else {
             LOGGER.warn("No file associated with the entry: {}", entry);
         }
-        return null;
+        return Path.of("");
     }
 
     /**
