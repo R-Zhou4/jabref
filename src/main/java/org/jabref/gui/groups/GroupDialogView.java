@@ -75,6 +75,7 @@ public class GroupDialogView extends BaseDialog<AbstractGroup> {
     @FXML private CheckBox autoColorCheckbox;
 
     // Type
+    @FXML private RadioButton noRankRadioButton;
     @FXML private RadioButton explicitRadioButton;
     @FXML private RadioButton keywordsRadioButton;
     @FXML private RadioButton searchRadioButton;
@@ -193,6 +194,7 @@ public class GroupDialogView extends BaseDialog<AbstractGroup> {
                 .install(hierarchicalContextCombo);
         hierarchicalContextCombo.valueProperty().bindBidirectional(viewModel.groupHierarchySelectedProperty());
 
+        noRankRadioButton.selectedProperty().bindBidirectional(viewModel.typeNoRankProperty());
         explicitRadioButton.selectedProperty().bindBidirectional(viewModel.typeExplicitProperty());
         keywordsRadioButton.selectedProperty().bindBidirectional(viewModel.typeKeywordsProperty());
         searchRadioButton.selectedProperty().bindBidirectional(viewModel.typeSearchProperty());

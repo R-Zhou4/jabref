@@ -39,17 +39,7 @@ import org.jabref.model.database.BibDatabase;
 import org.jabref.model.database.BibDatabaseContext;
 import org.jabref.model.entry.Keyword;
 import org.jabref.model.entry.field.FieldFactory;
-import org.jabref.model.groups.AbstractGroup;
-import org.jabref.model.groups.AutomaticGroup;
-import org.jabref.model.groups.AutomaticKeywordGroup;
-import org.jabref.model.groups.AutomaticPersonsGroup;
-import org.jabref.model.groups.ExplicitGroup;
-import org.jabref.model.groups.GroupHierarchyType;
-import org.jabref.model.groups.GroupTreeNode;
-import org.jabref.model.groups.RegexKeywordGroup;
-import org.jabref.model.groups.SearchGroup;
-import org.jabref.model.groups.TexGroup;
-import org.jabref.model.groups.WordKeywordGroup;
+import org.jabref.model.groups.*;
 import org.jabref.model.metadata.MetaData;
 import org.jabref.model.search.SearchFlags;
 import org.jabref.model.strings.StringUtil;
@@ -73,6 +63,8 @@ public class GroupDialogViewModel {
     private final ObjectProperty<GroupHierarchyType> groupHierarchySelectedProperty = new SimpleObjectProperty<>();
 
     // Type
+    private final BooleanProperty typeNoRankProperty = new SimpleBooleanProperty();
+
     private final BooleanProperty typeExplicitProperty = new SimpleBooleanProperty();
     private final BooleanProperty typeKeywordsProperty = new SimpleBooleanProperty();
     private final BooleanProperty typeSearchProperty = new SimpleBooleanProperty();
@@ -369,6 +361,9 @@ public class GroupDialogViewModel {
                         new DefaultAuxParser(new BibDatabase()),
                         fileUpdateMonitor,
                         currentDatabase.getMetaData());
+            } else if (typeNoRankProperty.getValue()) {
+                resultingGroup = new AllEntriesGroup(
+                        groupName);
             }
 
             if (resultingGroup != null) {
@@ -563,6 +558,11 @@ public class GroupDialogViewModel {
 
     public BooleanProperty typeExplicitProperty() {
         return typeExplicitProperty;
+    }
+
+
+    public BooleanProperty typeNoRankProperty() {
+        return typeNoRankProperty;
     }
 
     public BooleanProperty typeKeywordsProperty() {
