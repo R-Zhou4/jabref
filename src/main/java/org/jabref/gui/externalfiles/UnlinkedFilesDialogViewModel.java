@@ -33,7 +33,6 @@ import javafx.scene.control.TreeItem;
 
 import org.jabref.gui.DialogService;
 import org.jabref.gui.StateManager;
-import org.jabref.gui.duplicationFinder.DuplicateResolverDialog;
 import org.jabref.gui.preferences.GuiPreferences;
 import org.jabref.gui.util.DirectoryDialogConfiguration;
 import org.jabref.gui.util.FileDialogConfiguration;
