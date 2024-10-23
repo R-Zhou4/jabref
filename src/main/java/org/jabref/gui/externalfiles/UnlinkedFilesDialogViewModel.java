@@ -212,7 +212,6 @@ public class UnlinkedFilesDialogViewModel {
 
     /**
      * Extracts the file path from the given BibEntry.
-     *
      * @param entry The BibEntry instance from which to extract the file path
      * @return The file path if a valid file field exists in the BibEntry; otherwise, returns an empty path.
      */
