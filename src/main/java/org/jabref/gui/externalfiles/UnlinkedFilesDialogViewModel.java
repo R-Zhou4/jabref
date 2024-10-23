@@ -210,8 +210,14 @@ public class UnlinkedFilesDialogViewModel {
         importFilesBackgroundTask.executeWith(taskExecutor);
     }
 
+    /**
+     * Extracts the file path from the given BibEntry.
+     *
+     * @param entry The BibEntry instance from which to extract the file path
+     * @return The file path if a valid file field exists in the BibEntry; otherwise, returns an empty path.
+     *
+     */
     private Path getFilePathFromEntry(BibEntry entry) {
-
         Optional<String> fileField = entry.getField(StandardField.FILE);
         if (fileField.isPresent()) {
             String fileFieldValue = fileField.get();
