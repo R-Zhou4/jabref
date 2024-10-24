@@ -435,9 +435,7 @@ public class ImportHandler {
      */
     public List<BibEntry> getEntriesToImport(List<Path> files) {
         List<BibEntry> entriesToImport = new ArrayList<>();
-
         for (Path file : files) {
-
             if (FileUtil.isPDFFile(file)) {
                 var pdfImporterResult = contentImporter.importPDFContent(file);
                 List<BibEntry> pdfEntriesInFile = pdfImporterResult.getDatabase().getEntries();
