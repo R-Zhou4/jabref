@@ -10,13 +10,7 @@ import javax.swing.undo.UndoManager;
 import org.jabref.gui.undo.CountingUndoManager;
 import org.jabref.model.FieldChange;
 import org.jabref.model.entry.BibEntry;
-import org.jabref.model.groups.AbstractGroup;
-import org.jabref.model.groups.AllEntriesGroup;
-import org.jabref.model.groups.ExplicitGroup;
-import org.jabref.model.groups.GroupEntryChanger;
-import org.jabref.model.groups.GroupTreeNode;
-import org.jabref.model.groups.KeywordGroup;
-import org.jabref.model.groups.SearchGroup;
+import org.jabref.model.groups.*;
 
 public class GroupTreeNodeViewModel {
     private final GroupTreeNode node;
