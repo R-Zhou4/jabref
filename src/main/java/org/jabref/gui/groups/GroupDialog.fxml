@@ -69,6 +69,12 @@
             <Label text="%Collect by" styleClass="sectionHeader" style="-fx-padding: 0 10 0 0;"/>
             <HBox>
                 <VBox spacing="10.0">
+                    <RadioButton fx:id="noRankRadioButton" toggleGroup="$type" wrapText="true"
+                                 text="%No ranking">
+                        <tooltip>
+                            <Tooltip text="%Group containing entries with no ranking"/>
+                        </tooltip>
+                    </RadioButton>
                     <RadioButton fx:id="explicitRadioButton" toggleGroup="$type" wrapText="true"
                                  text="%Explicit selection">
                         <tooltip>
@@ -121,6 +127,18 @@
                             <Label text="%Search expression"/>
                             <TextField fx:id="searchGroupSearchTerm"/>
                         </VBox>
+                        <HBox spacing="10.0">
+                            <CheckBox fx:id="searchGroupCaseSensitive" text="%Case sensitive">
+                                <tooltip>
+                                    <Tooltip text="%This only affects unfielded terms. For using case-sensitive in a fielded term, use =! operator."/>
+                                </tooltip>
+                            </CheckBox>
+                            <CheckBox fx:id="searchGroupRegex" text="%Regular expression">
+                                <tooltip>
+                                    <Tooltip text="%This only affects unfielded terms. For using RegEx in a fielded term, use =~ operator."/>
+                                </tooltip>
+                            </CheckBox>
+                        </HBox>
                     </VBox>
                     <VBox visible="${autoRadioButton.selected}" spacing="10.0">
                         <RadioButton fx:id="autoGroupKeywordsOption" toggleGroup="$autoGroupOptions"
